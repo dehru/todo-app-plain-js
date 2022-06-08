@@ -1,0 +1,19 @@
+{
+  "name": "todo-app-plain",
+  "version": "1.0.0",
+  "description": "An implementation of todo mvc without a framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dehru/todo-app-plain-js.git"
+  },
+  "author": "dehru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dehru/todo-app-plain-js/issues"
+  },
+  "homepage": "https://github.com/dehru/todo-app-plain-js#readme"
+}
