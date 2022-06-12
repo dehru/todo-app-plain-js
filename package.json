@@ -4,7 +4,8 @@
   "description": "An implementation of todo mvc without a framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx http-server -c-1"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/dehru/todo-app-plain-js/issues"
   },
-  "homepage": "https://github.com/dehru/todo-app-plain-js#readme"
+  "homepage": "https://github.com/dehru/todo-app-plain-js#readme",
+  "dependencies": {
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.0"
+  }
 }
