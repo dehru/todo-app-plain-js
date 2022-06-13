@@ -24,4 +24,9 @@ export class TodoStore extends EventTarget {
         this.todos = this.todos.filter(todo => todo.id !== todoId);
         this._save();
     }
+
+    update(todo) {
+        this.todos = this.todos.map(t => t.id === todo.id ? todo : t);
+        this._save();
+    }
 }

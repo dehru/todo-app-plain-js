@@ -37,7 +37,8 @@ export class TodoApp {
             this.todoStore.todos.forEach(todo => {
                 this.$.list.appendChild(new Todo(todo.id, todo.title, todo.completed).render());
             });
-            this.$.list.addEventListener('todo:delete', e => this.todoStore.delete(e.detail.todoId));
+            this.$.list.addEventListener('todo:delete', e => this.todoStore.delete(e.detail.id));
+            this.$.list.addEventListener('todo:edit', e => this.todoStore.update(e.detail));
         } else {
             this.$.main.classList.add('hidden');
         }
@@ -57,6 +58,9 @@ class Todo {
         this.title = title;
         this.completed = completed;
     }
+    getPropsAsObj() {
+        return { id: this.id, title: this.title, completed: this.completed };
+    }
     render() {
         const li = document.createElement('li');
 		li.dataset.id = this.id;
@@ -69,11 +73,23 @@ class Todo {
 			</div>
 			<input class="edit">
 		`);
-		li.querySelector('label').textContent = this.title;
+        li.querySelector('label').textContent = this.title;
+        li.querySelector('label').addEventListener('dblclick', e => {
+            li.classList.add('editing');
+        });
         li.querySelector('.edit').value = this.title;
+        li.querySelector('.edit').addEventListener('keyup', e => {
+            if (e.key === 'Enter' && e.target.value.length > 0) {
+                e.preventDefault();
+                this.title = e.target.value;
+                const editedEvent = new CustomEvent('todo:edit', { bubbles: true, detail: this.getPropsAsObj() });
+                e.target.dispatchEvent(editedEvent);
+                li.classList.remove('editing');
+            }
+        });
         li.querySelector('.destroy').addEventListener('click', e => {
             e.preventDefault();
-            const deleteEvent = new CustomEvent('todo:delete', { bubbles: true, detail: { todoId: this.id } });
+            const deleteEvent = new CustomEvent('todo:delete', { bubbles: true, detail: { id: this.id } });
             e.target.dispatchEvent(deleteEvent);
         });
 		return li;
